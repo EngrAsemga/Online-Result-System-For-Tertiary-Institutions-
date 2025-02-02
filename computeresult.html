@@ -1,0 +1,483 @@
+
+
+
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'comput.css'%}" />
+
+<style>
+
+    .nav-tags{
+        position:fixed;
+        width:100%;
+        top:0;
+        
+    }
+    .result-dispay-tags{
+        margin-top:150px;
+    }
+    .logout-tags{
+        display:flex;
+        justify-content:space-between;
+        margin-top:40px;
+        margin-bottom:40px;
+        border: 1px solid;
+        border-radius:5px;
+        border-color:silver;
+        background-color:silver;
+        padding-left:5px
+        
+    }
+   
+
+    .first-sem-tags{
+        border:1px solid;
+        border-radius:5px;
+        padding:10px;
+       margin-top:60px;
+
+
+    }
+
+    .sec-sem-tags{
+        border:1px solid;
+        border-radius:5px;
+        margin-top:60px;
+        padding:10px;
+
+    }
+
+    .sec-sem-tags td:first-child:before{
+    counter-increment:serial;
+    content: counter(serial);
+}
+
+    body{
+        counter-reset:serial;
+        
+    }
+
+
+    .first-sem-tags td:first-child:before{
+        counter-increment:serial;
+        content: counter(serial);
+    }
+    table {
+        width:100%;
+        text-align:center;
+       
+    }
+    .table, td{
+        border:1px solid;
+    }
+    .table,th{
+        border:1px solid;
+    }
+    
+    
+</style>
+
+<html>
+
+
+
+    <head>
+        <title> 
+            iskcoe
+        </title>
+    </head>
+    <div class="nav-tags">
+    <nav>
+        
+        <div class="logout-tags">
+        <a style="text-decoration:None;" href="{{ request.META.HTTP_REFERER}}"><h4> Back</h4></a>
+        <a style="text-decoration:None;" href="/"> <h4> Home</h4> </a>
+        
+         {% if user.is_authenticated %}
+         <a style="text-decoration:None;" href="changepassword"> <small>Change Password </small> </a>
+         <small> Welcome {{user.username}} <a style="text-decoration:None;" href="logout"> Logout </a> </small>
+         {% endif %}
+        </div>
+    </nav>
+</div>
+    <body>
+                
+                <div class="result-dispay-tags">
+                    <div class="first-sem-tags">
+                        <h4> Student Name: {{display_name}} - Student No: {{studentno}} <h4> 
+                            
+                        <table>
+
+                            <caption> First Semister Result NCE 1</caption>
+                            <thead>
+                                <tr>
+                                    <th>  S/N</th>
+                                    
+                                    
+                                   
+                                    <th>Course Title</th>
+                                    
+                                   
+                                    <th>Course Unit</th>
+                                    <th>Test</th>
+                                    <th>Exam</th>
+                                    <th>Total Scores</th>
+                                    <th>Grade</th>
+                                   
+                                    
+                                </tr>
+                            </thead>
+                            
+                            <tbody>                                                                                                                                                
+                                {% for k in fsrt reversed %}
+                                
+                               
+                                <tr>
+                                    
+                                    <td>  </td> 
+                                    <td>{{k.Title}}</td>                                                                                                                                                                    
+                                    
+                                    
+                                    <td>{{k.Units}}</td> 
+                                    <td>{{k.test}}</td>   
+                                    <td>{{k.exams}}</td>
+                                    <td>{{k.scores}}</td>                                                                                                    
+                                    <td> {{k.grade}}</td>
+                                                                                                    
+                                </tr>                                                                                                                                                                                              
+                                <tr>                                                                                                                                                                           
+                               
+                               {% endfor%}   
+                            </tbody>                                                                                                                                             
+                                               
+                        </table>
+                        <h5>Total Unit: {{total_courseunit}}</h5>
+                        <h5>GP: {{sum_gradepoint}}</h5>
+                        <h4>GpA: {{Gpa|floatformat:2}} </h4>
+                                               
+                    </div>                                                   
+                    <div class="sec-sem-tags">
+                        <h4> Student Name: {{display_name2}} Student No: {{studentno2}} <h4> 
+                    
+                        <table>
+                            <caption> Second Semister Result NCE 1</caption>
+                            <thead>
+                                
+                                <tr>
+                                    <th> S/N</th>
+                                    
+                                   
+                                    
+                                    <th>Course Title</th>
+                                   
+                                   
+                                    <th>Course Unit</th>
+                                    <th>Test</th>
+                                    <th>Exam</th>
+                                    <th>Total Scores</th>
+                                    <th>Grade </th>
+
+                                    
+                                   
+                                    
+                                </tr>
+                            </thead>
+
+                           
+                             <tbody>
+                                {% for x in secrt reversed %}                            
+                                <tr>
+                                    <td>  </td>
+                                    <td>{{x.SecTitle}}</td>                                                                                                                            
+                               
+                                   
+                                    <td>{{x.secUnits}}</td>
+                                    <td>{{x.sectest}}</td>
+                                    <td>{{x.secexams}}</td>
+                                    <td>{{x.secscores}}</td>
+                                    <td>{{x.sec_grade}}</td>                                                                                        
+                                    
+                                
+
+                                </tr>
+                                
+                                {% endfor %} 
+                                
+                               
+                               
+                               
+                            </tbody>
+                                
+                                
+                            
+
+                        </table>
+                                <h5> Total Units: {{sec_total_courseunit}}</h5>
+                                <h5>GP: {{sec_sum_gradepoint}}</h5>
+                                    
+                             <h4>GPA: {{sec_gpa|floatformat:2}}</h4>
+                            
+                             <h4>CGPA: {{cgpa|floatformat:2}} </h4>                                                                                                              
+
+                    </div>
+
+                </div>
+                 {% comment "" %} First semister NCE 2{% endcomment %}
+                 <div class="first-sem-tags">
+                    <h4> Student Name: {{studentnameNce2}} - Student No: {{studentnoNce2}} <h4> 
+                        
+                    <table>
+
+                        <caption> First Semister Result NCE 2</caption>
+                        <thead>
+                            <tr>
+                                <th>  S/N</th>
+                                
+                                
+                               
+                                <th>Course Title</th>
+                                
+                               
+                                <th>Course Unit</th>
+                                <th>Test</th>
+                                <th>Exam</th>
+                                <th>Total Scores</th>
+                                <th>Grade</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                       
+                        <tbody>                                                                                                                                                
+                            {% for ncet1 in fsrtNceTwo reversed %}
+                            
+                           
+                            <tr>
+                                
+                                <td>  </td> 
+                                <td>{{ncet1.Title}}</td>                                                                                                                                                                    
+                             
+                                
+                                <td>{{ncet1.Units}}</td>  
+                                <td>{{ncet1.test}}</td>
+                                <td>{{ncet1.exams}}</td> 
+                                <td>{{ncet1.scores}}</td>                                                                                                     
+                                <td> {{ncet1.grade}}</td>
+                                                                                               
+                            </tr>                                                                                                                                                                                              
+                            <tr>                                                                                                                                                                           
+                           
+                           {% endfor%}   
+                        </tbody>                                                                                                                                             
+                                           
+                    </table>
+                    <h5>Total Unit: {{Ncetftotal_courseunit}}</h5>
+                    <h5>GP: {{ Ncetfsum_gradepoint}}</h5>
+                    <h4>GpA: {{NcetfGpa|floatformat:2}} </h4>
+                                           
+                </div>  
+                {% comment "" %} Second semister NCE2{% endcomment %} 
+                <div class="sec-sem-tags">
+                        <h4> Student Name: {{sec_studentnameNce2}} - Student No: {{Ncetsecstudentno2}} <h4> 
+                    
+                        <table>
+                            <caption> Second Semister Result NCE 2</caption>
+                            <thead>
+                                
+                                <tr>
+                                    <th> S/N</th>
+                                    
+                                   
+                                    
+                                    <th>Course Title</th>
+                                    
+                                   
+                                    <th>Course Unit</th>
+                                    <th>Test</th>
+                                    <th>Exam</th>
+                                    <th>Total Scores</th>
+                                    <th>Grade </th>
+
+                                    
+                                   
+                                  
+                                </tr>
+                            </thead>
+
+                           
+                             <tbody>
+                                {% for ncetsec in secrtNceTwo reversed %}                            
+                                <tr>
+                                    <td>  </td>  
+                                    <td>{{ncetsec.SecTitle}}</td>                                                                                                                          
+                                
+                                   
+                                    <td>{{ncetsec.secUnits}}</td>
+                                    <td>{{ncetsec.sectest}}</td>
+                                    <td>{{ncetsec.secexams}}</td>
+                                    <td>{{ncetsec.secscores}}</td>
+                                   
+                                    <td>{{ncetsec.sec_grade}}</td>                                                                                        
+                                    
+                                
+
+                                </tr>
+                                
+                                {% endfor %} 
+                                
+                               
+                               
+                               
+                            </tbody>
+                                
+                                
+                            
+
+                        </table>
+                                <h5> Total Units: {{Ncetsec_total_courseunit}}</h5>
+                                <h5>GP: {{Ncetsec_sum_gradepoint}}</h5>
+                                    
+                            <h4>GPA: {{Ncetsec_gpa|floatformat:2}}</h4>
+                            
+                             <h4>CGPA: {{Ncetcgpa|floatformat:2}} </h4>                                                                                                         
+                    </div>
+
+                </div>                                   
+
+                  {% comment "" %} NCE Three first semister {% endcomment %}
+                  <div class="first-sem-tags">
+                    <h4> Student Name: {{Ncetrfstudentname}} - Student No: {{Ncetrfstudentno}} <h4> 
+                        
+                    <table>
+
+                        <caption> First Semister Result NCE 3</caption>
+                        <thead>
+                            <tr>
+                                <th>  S/N</th>
+                                
+                                
+                               
+                                <th>Course Title</th>
+                          
+                               
+                                <th>Course Unit</th>
+                                <th>Test</th>
+                                <th>Exam</th>
+                                <th>Total Scores</th>
+                                <th>Grade</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                       
+                        <tbody>                                                                                                                                                
+                            {% for ncetrf in fsrtNceThree reversed %}
+                            
+                           
+                            <tr>
+                                
+                                <td>  </td>
+                                <td>{{ncetrf.Title}}</td>                                                                                                                                                                     
+                              
+                                
+                                <td>{{ncetrf.Units}}</td> 
+                                <td>{{ncetrf.test}}</td>
+                                <td>{{ncetrf.exams}}</td>
+                                <td>{{ncetrf.scores}}</td>                                                                                                       
+                                <td> {{ncetrf.grade}}</td>
+                                                                                              
+                            </tr>                                                                                                                                                                                              
+                            <tr>                                                                                                                                                                           
+                           
+                           {% endfor%}   
+                        </tbody>                                                                                                                                             
+                                           
+                    </table>
+                    <h5>Total Unit: {{Ncetrftotal_courseunit}}</h5>
+                    <h5>GP: {{Ncetrfsum_gradepoint}}</h5>
+                    <h4>GpA: {{NcetrfGpa |floatformat:2}} </h4>
+                                           
+                </div>  
+
+                {% comment "" %} Nce Three second semicter {% endcomment %}
+                <div class="sec-sem-tags">
+                    <h4> Student Name: {{Ncetrsecstudentname}} - Student No: {{Ncetrsecstudentno2}} <h4> 
+                
+                    <table>
+                        <caption> Second Semister Result NCE 3 </caption>
+                        <thead>
+                            
+                            <tr>
+                                <th> S/N</th>
+                                
+                               
+                                
+                                <th>Course Title</th>
+                               
+                               
+                                <th>Course Unit</th>
+                                <th>Test</th>
+                                <th>Exam</th>
+                                <th>Total Scores</th>
+                                <th>Grade </th>
+
+                                
+                               
+                                
+                            </tr>
+                        </thead>
+
+                       
+                         <tbody>
+                            {% for ncetrsec in secrtNceThree reversed %}                            
+                            <tr>
+                                <td>  </td> 
+                                <td>{{ncetrsec.SecTitle}}</td>                                                                                                                           
+                            
+                               
+                                <td>{{ncetrsec.secUnits}}</td>
+                                <td>{{ncetrsec.sectest}}</td>
+                                <td>{{ncetrsec.secexams}}</td>
+                                <td>{{ncetrsec.secscores}}</td>
+                                
+                                <td>{{ncetrsec.sec_grade}}</td>                                                                                        
+                                
+                            
+
+                            </tr>
+                            
+                            {% endfor %} 
+                            
+                           
+                           
+                           
+                        </tbody>
+                            
+                            
+                        
+
+                    </table>
+                            <h5> Total Units: {{Ncetrsec_total_courseunit}}</h5>
+                            <h5>GP: {{Ncetrsec_sum_gradepoint}}</h5>
+                                
+                         <h4>GPA: {{Ncetrsec_gpa|floatformat:2}}</h4>
+                        
+                         <h4>CGPA: {{Ncetrcgpa|floatformat:2}} </h4>
+                         <h4 style=" color:blue;"> SUM TOTAL UNITS: {{TotalUnits|floatformat:2}}</h4> 
+                         <h4 style=" color:red;">FINAL CGPA: {{FinalCgpa|floatformat:2}}</h4>
+    </body>
+    
+    
+ 
+ 
+    
+   
+    
+    {% include "footer.html" %}
+   
+  
+<html>
+  
+
+
+

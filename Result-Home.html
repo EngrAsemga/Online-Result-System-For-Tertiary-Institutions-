@@ -1,0 +1,219 @@
+
+
+
+{% load static %}
+     
+<!--<link rel="stylesheet"  href= "{% static 'resultHome.css' %}"/> -->
+<style>
+    .nav-tags{
+        position:fixed;
+        width:100%;
+        top:0;
+        
+    }
+    
+   .result-tags{
+       display:flex;
+       justify-content:space-between;
+       text-decoration:none;
+       margin-top:40px;
+       border:1px solid;
+       border-radius:5px;
+       padding:10px;
+       background-color:silver;
+       
+       
+       
+       
+       }
+
+
+       
+   a:hover{
+       color:grey;
+       text-decoration:none;
+   }
+   #head ,h3{
+       margin-top:30px;
+       text-align:center;
+       
+   }
+   h2{
+    text-shadow:0px 0px 5px yellow, 0px 5px 5px blue;
+    text-align:center;
+    transform:skewx(30deg);
+    animation:rotate;
+    animation: color;
+    animation-duration:10s;
+    animation-iteration-count:infinite;
+   }
+
+   @keyframes color{
+    0%{background-color:red;}
+    20%{background-color:blue;}
+    40%{background-color:yellow;}
+    60%{background-color:purple;}
+    80%{background-color:orange;}
+    100%{background-color:green;}
+
+   }
+   @keyframes rotate{
+    100%{transform:rotateX(360deg);}
+   }
+
+   .det-cors-tags{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    background-color:silver;
+    margin-top:100px;
+    border:1px solid;
+    border-radius:5px;
+    padding-bottom:10px;
+    
+    }
+    
+    table{
+        width:150%;
+        margin-top:50px;
+        border: 1px solid;
+        border-radius:5px;
+        margin-left:10px;
+
+    }
+    table,th{
+        border:1px solid;
+    }
+    table,td{
+        border:1px solid;
+    }
+
+    .detart-tags{
+        margin-left:50px;
+        margin-top:50px;
+        border: 1px solid;
+        border-radius:5px;
+        text-align:cnter;
+        padding:20px;
+    }
+
+    body{
+    
+        
+    }
+    
+   .signin-tags{
+    margin-top:150px;
+    border: 1px solid;
+    border-radius:5px;
+    width:280px;
+    height:350px;
+    text-align:center;
+    margin-left:500px;
+    background-color:silver;
+    outline:none;
+   }
+   .signin-tags, input{
+    outline:none;
+    
+   } 
+   .loginmsg-tags{
+    margin-top:150px;
+    text-align:center;
+    color:red;
+   } 
+
+   
+   
+</style> 
+
+<html>
+   <head>
+       <title>
+           Iskcoe
+       </title>
+       <h2> Welcome To The Result Management Portal</h2>
+   </head>
+  
+   <div class="nav-tags">
+   <nav  >
+       <div></div>
+       <div class="result-tags">
+           <div class="home-tags"> 
+               <a style="text-decoration:None;" href=""> <h4>Home</h4> </a>
+           </div>
+           <div class="home-tags"> 
+            <a style="text-decoration:None;" href="{% url 'resultsignin' %}"> <h4>Sign In </h4> </a>
+        </div>
+           
+           <div class="student-tags">
+            {% if user.is_authenticated %}
+            <a style="text-decoration:None;" href="changepassword"> <small>Change Password </small> </a>
+            <small>Welcome {{request.user.username}}
+               <a style="text-decoration:None;" href="logout">  Logout </small> </a> 
+               {% else %}
+               <div class="staff-tags">
+                <a style="text-decoration:None;" href=" {% url 'resultlogin' %}"> <h4 id="rst">Login</h4> </a>
+               </div>
+                {% endif %}
+           </div>
+       </div>
+   </nav>
+</div>
+
+<body>
+    <div class="loginmsg-tags">
+        {% for loginmsg in messages %}
+        {{loginmsg}}
+        {% endfor %}
+    </div>
+    <div  class="det-cors-tags">
+        <div class="detart-tags">
+            <span> A list of College Departments</span>
+            {% for dept in depart reversed %}
+             <ul>
+                <li><h3> {{dept.name}} </h3> </li>
+             </ul>
+                {% endfor %}
+
+        </div>
+
+
+   <div class="dept-cor-tags">
+           <!-- departments display-->
+           <table>
+            <caption> A list of college courses.</caption>
+            <thead>
+                <tr>
+                <th> <h3> Course Title</h3></th>
+                <th> <h3> Course Code</h3></th>
+                <th> <h3> Course Unit</h3></th>
+                <th> <h3> Departmental Course</h3></th>
+                <th> <h3> Level</h3></th>
+               
+                </tr>
+            </thead>
+            <tbody>
+                <!-- courses display -->
+                {% for cors in college reversed %}
+            <tr>
+                
+                
+                <td> <h3>{{cors.courseTitle}} </h3> </td>
+                <td> <h3> {{cors.courseCode}}</h3> </td>
+                <td> <h3> {{cors.Courseunit}}</h3> </td>
+                <td> <h3>{{cors.department}} </h3> </td>
+                <td> <h3>{{cors.level}} </h3> </td>
+               
+            </tr>
+            {% endfor %}
+            </tbody>
+        
+           </table>
+    </div>
+</div>
+           
+         
+   
+</body>
+ {% include "footer.html" %}
+</html>

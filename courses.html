@@ -1,0 +1,138 @@
+
+
+
+
+
+
+{% load static%}
+
+
+
+
+<style>
+    .nav-tags{
+        position:fixed;
+        width:100%;
+        top:0;
+        
+    }
+  
+
+    .upld-msg-tags{
+        text-align:center;
+        color:Blue;
+        margin-top:100px;
+        
+    }
+    .logout-tags{
+        display:flex;
+        justify-content:space-between;
+        
+        
+       
+        border: 1px solid;
+        border-radius:5px;
+        border-color:silver;
+        background-color:silver;
+        padding-left:5px
+        
+    }
+    a:hover{
+        color:grey;
+       
+    }
+   
+    .rst-fors-tags{
+        margin-top:50px;
+    }
+
+
+    .upload-result-form{
+
+        border:1px solid;
+        padding-top:15px;
+        outline:none;
+        border-color:silver;
+        background-color:silver;
+        border-radius:5px;
+        width:300px;
+        margin-left:400px;
+        text-align:center;
+        margin-top:50px;
+        
+        
+        
+    }
+    
+        
+
+    
+    .upload-result-form,input{
+        margin-top: 5px;
+        text align: center;
+        padding:5px;
+    }
+
+    
+  
+    .fsrt-form-tags,input{
+        margin-bottom:5px;
+        outline:none;
+    }
+    
+</style>
+
+<html>
+
+
+
+    <head>
+        <title> 
+            iskcoe
+        </title>
+    </head>
+    <div class="nav-tags">
+    <nav>
+        <div class="logout-tags">
+            <a style="text-decoration:None;" href="{{ request.META.HTTP_REFERER}}"><h4> Back</h4></a>
+            <a style="text-decoration:None;" href="/"> <h4> Home</h4> </a>
+            <a style="text-decoration:None;" href="studentregistration"> <h4> Students Registration</h4> </a>
+            <a style="text-decoration:None;" href="lecturerregistration"> <h4> Staff Registration</h4> </a>
+            <a style="text-decoration:None;" href="staffpage"> <h4> Departmental Registration</h4> </a>
+            <a style="text-decoration:None;" href="uploadresult"> <h4> Upload Result</h4> </a>
+             {% if user.is_authenticated %}
+             <small> Welcome {{user.username}} <a style="text-decoration:None;" href="logout"> Logout </a> </small>
+             {% endif %}
+            </div>
+    </nav>
+</div>
+
+    <body>
+        <div class="msg-rstform">
+         {% for  msg in messages %}
+
+        <div class="upld-msg-tags"> <span>{{msg}} </span></div>
+        
+        {% endfor %}
+        </div>
+        <div class="rst-fors-tags">
+        
+
+        <div class="upload-result-form">
+            <h4> Course Registration </h4>
+            
+            <form method="POST" action="" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{courseform}}
+            
+                <input type="submit" value="upload"  >
+            </form>
+        </div>  <br>
+
+        
+        
+        </div>
+    
+    </body>
+   {% include 'footer.html'%}
+</html>

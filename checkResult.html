@@ -1,0 +1,62 @@
+
+
+<style>
+    .logout-tags{
+        display:flex;
+        justify-content:space-between;
+        margin-top:40px;
+        margin-bottom:40px;
+        border: 1px solid;
+        border-radius:5px;
+        border-color:silver;
+        background-color:silver;
+        padding-left:5px
+    }
+
+    .check-form-tag{
+        border:1px solid;
+        border-radius:10px;
+        width:250px;
+        padding:20px;
+        margin-left:350px;
+        background-color:grey;
+
+    }
+</style>
+
+
+
+<html>
+    <head>
+        <title> 
+            iskcoe
+        </title>
+    </head>
+    <nav>
+        
+        <div class="logout-tags">
+        <a href="{{ request.META.HTTP_REFERER}}"><h4> Back</h4></a>
+        <a href="/"> <h4> Home</h4> </a>
+        
+         {% if user.is_authenticated %}
+         <small> Welcome {{user.username}} <a href="logout"> Logout </a> </small>
+         {% endif %}
+        </div>
+    </nav>
+    <body>
+        <div class="check-form-tag">
+        <form method="POST" action="Computeresult" >
+            {% csrf_token %}
+            
+            {{check.as_p}}
+            <input type="submit" value="check" />
+
+        </form>
+    </div>
+
+    
+
+        
+    </body>
+     {% include "footer.html" %}
+</html>

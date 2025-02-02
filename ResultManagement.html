@@ -1,0 +1,128 @@
+
+
+
+
+{% load static%}
+<link rel="stylesheet" href="{% static 'resultmanagement.css' %}" />
+    <style>
+        . nav-tags{
+            position:fixed;
+            width:100%;
+            top:0;
+            
+        }
+
+        .rstMag-tags{
+            margin-top:30px;
+            margin-left:50px;
+            text-decoration:none;
+            
+        }
+         a:hover{
+            color:grey;
+        }
+
+
+        .login-form{
+            
+            margin-top:30px;
+            border:1px solid;
+            border-radius:10px;
+            width:280px;
+            height:200px;
+            
+            background-color:silver;
+            padding:10px;
+            margin-left:550px;
+            
+        }
+        .login-form, input{
+
+            
+            border-radius:5px;
+            margin-top:30px;
+            outline:none;
+            
+            }
+        .msg-tags{
+            text-align:center;
+            margin-top:20px;
+            color:Blue;
+        }
+        .log-tag{
+            text-align:center;
+            margin-top:40px;
+            
+        }
+        .logout-tags{
+            display:flex;
+            justify-content:space-between;
+            margin-top:40px;
+            margin-bottom:40px;
+            border: 1px solid;
+            border-radius:5px;
+            border-color:silver;
+            background-color:silver;
+            padding:5px;
+        }
+    </style>
+<html>
+    <head>
+        <title>
+            Iskcoe
+        </title>
+    </head>
+    <div class="nav-tags">
+    <nav>
+        
+        <div class="logout-tags">
+        <a style="text-decoration:None;" href="{{ request.META.HTTP_REFERER}}"><h4> Back</h4></a>
+        <a style="text-decoration:None;" href="/"> <h4> Home</h4> </a>
+        
+         {% if user.is_authenticated %}
+         <a style="text-decoration:None;" href="changepassword"> <small> Change Password</small> </a>
+         <small> Welcome {{user.username}} <a style="text-decoration:None;" href="logout"> Logout </a> </small>
+         {% endif %}
+        </div>
+    </nav>
+</div>
+    <body>
+       <div class="log-tag"> <span> Login Below to proceed. </span></div> <br>
+        <div class="msg-tags">
+            
+            {% for  msg in messages %}
+            {{msg}} 
+            {% endfor %}
+        </div>
+
+        <div class="login-form">
+       <form method="POST" action="resultlogin">
+           {% csrf_token %}
+           <label> Username: </label>
+           <input type="text" name="username"/> <br> <br>
+           <label> Password: </label>
+           <input type="password" name="password" id="MyInput"/> <br>
+           <input type="Checkbox" 
+           onclick="MyFunction()"> Show Password<br> <br>
+           <button class="btn  btn-primary" id="login-btton"> Login</button>
+           
+           </form>
+   </div> 
+        <script>
+            function MyFunction(){
+            Var x = document.getElementById("MyInput");
+            if (x.type === "password")
+            {
+                x.type="text";
+            }
+            else
+            {
+                x.type="password";
+            
+            }
+            }
+            </script>
+            
+    </body>
+   {% include "footer.html" %}
+</html>

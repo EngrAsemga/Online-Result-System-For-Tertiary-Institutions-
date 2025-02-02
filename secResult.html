@@ -1,0 +1,116 @@
+
+
+
+
+
+
+{% load static%}
+
+
+
+
+<style>
+    
+  
+
+    .upld-msg-tags{
+        text-align:center;
+        color:Blue;
+        margin-top:50px;
+       
+    }
+    .logout-tags{
+        display:flex;
+        justify-content:space-between;
+        
+       
+        border: 1px solid;
+        border-radius:5px;
+        border-color:silver;
+        background-color:silver;
+        padding-left:5px
+        
+        
+    }
+    a:hover{
+        color:grey;
+    }
+
+    .upload-result-form{
+        
+        border:1px solid;
+        padding-top:15px;
+        outline:none;
+        border-color:silver;
+        background-color:silver;
+        border-radius:5px;
+        width:300px;
+        margin-left:450px;
+        text-align:center;
+        
+        
+        
+    }
+    .upload-result-form,input{
+        margin-top: 5px;
+        text align: center;
+        padding:5px;
+    }
+
+    .rst-fors-tags{
+       margin-top:50px;
+    }
+    .secrst-tags{
+        border:1px solid;
+        padding-top:15px;
+        outline:none;
+        border-color:silver;
+        background-color:silver;
+        border-radius:5px;
+        width:300px;
+        margin-left:100px;
+        text-align:center;
+
+    }
+    
+</style>
+
+
+
+<html>
+    <head>
+        <title>Iskcoe</title>
+    </head>
+    <div class="nav-tags">
+    <nav>
+        
+        <div class="logout-tags">
+            <a style="text-decoration:None;" href="{{ request.META.HTTP_REFERER}}"><h4> Back</h4></a>
+        <a style="text-decoration:None;" href="/"> <h4> Home</h4> </a>
+        
+         {% if user.is_authenticated %}
+         <small> Welcome Sir {{user.username}} <a style="text-decoration:None;" href="logout"> Logout </a> </small>
+         {% endif %}
+        </div>
+    
+    </nav>
+   </div>
+    <body>
+         {% for  msg in messages %}
+        <div class="upld-msg-tags"> <span>{{msg}} </span></div>
+        {% endfor %}
+        <div class="rst-fors-tags">
+        <div class="upload-result-form">
+            <h4> Second Semister Result</h4>
+            <form method="POST" action=""  enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{uploadsecform}}
+                
+                <input type="submit" value="upload">
+            </form>
+        </div>
+
+</div>
+    </body>
+    {% include "footer.html" %}
+</html>

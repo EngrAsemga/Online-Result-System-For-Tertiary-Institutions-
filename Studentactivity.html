@@ -1,0 +1,354 @@
+
+
+
+<style>
+    .logout-tags{
+        display:flex;
+        justify-content:space-between;
+        margin-top:40px;
+        margin-bottom:40px;
+        border: 1px solid;
+        border-radius:5px;
+        border-color:silver;
+        background-color:silver;
+        padding-left:5px
+        
+    }
+    a:hover{
+        color:grey;
+    }
+    .reg-tab-tags{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top:50px;
+        margin-left:80px;
+        
+        
+    }
+    .cors-reg-form-tags{
+        margin-top:50px;
+        margin-left:50px;
+        border:1px solid;
+        border-radius:5px;
+        padding-top:20px;
+        padding-left:10px;
+        background-color:silver;
+        
+    }
+    table{
+        width:300px;
+    }
+    .first-sem-tags{
+        border:1px solid;
+        border-radius:5px;
+        padding-top:20px;
+        padding-left:40px;
+        padding-bottom:20px;
+    }
+    body{
+        counter-reset:serial;
+    }
+    .first-sem-tags td:first-child:before{
+        counter-increment:serial;
+        content: counter(serial);
+    }
+    .sec-sem-tags{
+        border:1px solid;
+        border-radius:5px;
+        padding-top:20px;
+        padding-left:40px;
+        padding-bottom:20px;
+    }
+    .sec-sem-tags td:first-child:before{
+        counter-increment:serial;
+        content:conuter(serial);
+
+    }
+    #form-id{
+        color:blue;
+        margin-top:10px;
+        margin-left:150px;
+    }
+</style>
+
+
+<html>
+    <head>
+        <title>Iskcoe</title>
+    </head>
+    <nav>
+        
+        <div class="logout-tags">
+            <a href="{{ request.META.HTTP_REFERER}}"><h4> Back</h4></a>
+        <a href="/"> <h4> Home</h4> </a>
+        <a href="checkresults"> <h4> Check Result</h4> </a>
+        <a href=""> <h4> View Courses</h4> </a>
+         {% if user.is_authenticated %}
+         <span> Welcome {{user.username}} <a href="logout"> Logout </a> </span>
+         {% endif %}
+        </div>
+    </nav>
+
+    <body>
+        <div class="cors-reg-form-tags">
+        <form method=="POST" action="">
+            {% csrf_token %}
+            <div class="form-name-tags">
+            <span>Student Name</span>
+            <input type="text" name="studentName" />
+            <span>Reg No</span>
+            <input type="text" name="regNo"  size="10"/>
+            <span>Department</span>
+            <input type="text" name="department"  size="10"/>
+            <span>Session</span>
+            <input type="text" name="session"  size="5"/>
+            <span>Semister</span>
+            <input type="text" name="semister"  size="5"/>
+            <span>Level</span>
+            <input type="text" name="level"  size="5"/> <hr>
+            </div>
+            <div class="reg-tab-tags">
+            <div class="first-sem-tags">
+            <table>
+                <caption> Register your courses for the first semister </caption>  
+                <thead>
+                    <tr>
+                    <th> <h4> S/N</h4></th>
+                    <th> <h4> Course Title</h4></th>
+                    <th> <h4> Course Code</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- courses display -->
+                    
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <!--<tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                    <td> <input type="text" name="courseCode"  size="5"/></td>  
+                </tr>
+                
+                </tbody>
+            
+               </table>
+            </div>
+            <div class="sec-sem-tags">
+                <table>
+                    <caption> Register your courses for the second semister </caption>
+                    <thead>
+                        <tr>
+                        <th> <h4> S/N</h4></th>
+                        <th> <h4> Course Title</h4></th>
+                        <th> <h4> Course Code</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- courses display -->
+                        
+                    <!--<tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <input type="text" name="courseTitle"  size="10"/> </td>
+                        <td> <input type="text" name="courseCode"  size="5"/></td>  
+                    </tr>
+                -->
+                    </tbody>
+                        
+                   </table>
+                   <input id="form-id" type="submit" value="Register" />
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
+
+    {% include "footer.html" %}
+</html>
